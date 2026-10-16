@@ -1,0 +1,6 @@
+<!-- Record from Irene's Figma file (Page 2 → layout → Frame 4: "Ellipse 4" + "Subtract").
+     The drop shadow is applied in CSS so it stays still while the record spins. -->
+<svg viewBox="0 0 501 501" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="250.5" cy="250.5" r="250.5" fill="#D9D9D9"/>
+  <circle cx="250.5" cy="250.5" r="76.5" fill="#000000"/>
+</svg>

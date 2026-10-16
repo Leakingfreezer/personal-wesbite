@@ -1,0 +1,6 @@
+node_modules
+dist
+.sanity
+
+# Your project settings — copy .env.example to .env
+.env

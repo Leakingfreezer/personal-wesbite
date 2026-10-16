@@ -1,0 +1,16 @@
+node_modules
+dist
+*.tsbuildinfo
+.vercel
+
+# Environment — never commit real credentials
+.env
+.env.local
+.env.*.local
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea
