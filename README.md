@@ -67,16 +67,14 @@ these come from `src/data/mockProjects.ts`.
 ### Mini widgets in the grid
 The grid also holds two widgets. Each one has its own `order` and `cardSize`, so it slots in between projects.
 They move to Sanity in Phase 6; until then, edit `src/data/mockWidgets.ts`.
-- **Tech-stack folder** (`src/components/widgets/TechStackFolder.tsx`): on hover, or when the arrow is tapped,
-  the tool logos rise out of the folder. Edit the `tools` list. Logos live in `public/assets/tech/`.
-- **Record player** (`src/components/widgets/`): click the card to play or pause.
-  While it plays, the record spins, the equalizer bounces, and the bar and time count up.
-  Hovering turns the record upright and grows it to show the full album cover.
+- **Tech stack** (About section, `src/components/about/TechStackReel.tsx`): "techstack/" followed by a
+  slot-machine reel of tools. Edit the tools in Studio, under **Tech stack**. Logos live in `public/assets/tech/`.
+- **Record player** (`src/components/widgets/`): a grainy grey card with the record (album cover on it).
+  Click the round button or the card to play / pause; while it plays, the record spins like a vinyl.
   - Song, artist, mp3 and cover are set in Studio, under **Record player**.
   - The plain record artwork is `public/assets/widgets/record.svg`.
   - How it behaves is written down as design rules in `CLAUDE.md`.
-  - Files: the card is `AudioPlayerWidget.tsx`, the spinning and growing record is `RecordDisc.tsx`,
-    and the bouncing bars are `EqualizerIcon.tsx`.
+  - Files: the card is `AudioPlayerWidget.tsx`, and the spinning record is `RecordDisc.tsx`.
 
 ### Case study pages
 Every project gets a page at `/work/<slug>` from **one** template, `src/pages/CaseStudyPage.tsx`.

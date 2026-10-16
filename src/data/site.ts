@@ -110,12 +110,16 @@ export const site = {
 
   /**
    * Little UI sounds. Files live in /public/assets/sounds/ — swap a path to change a sound.
-   * `hover` plays when the mouse moves onto a hero pill or an About highlight.
+   *   hover → the mouse moves onto a hero pill
+   *   click → clicking a nav link (Work, About, Lets Chat!) or the Contact button
+   * Volumes: 0 = silent, 1 = full volume.
+   * Credits for the sound files (attribution to show somewhere): docs/CREDITS.md
    */
   sounds: {
     hover: '/assets/sounds/liecio-menu_beep_short_snap-533778.mp3',
-    /** 0 = silent, 1 = full volume. */
     hoverVolume: 0.4,
+    click: '/assets/sounds/liecio-menu_beep_short_snap-533778.mp3',
+    clickVolume: 0.5,
   },
 
   /** Fixed artwork for the Past Work widgets (their content — the song — is in Sanity). */

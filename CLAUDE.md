@@ -43,29 +43,27 @@ and explain what any new dependency does before installing it.
 - Don't recreate Irene's 3D artwork with CSS/emoji — use her exported assets or labeled placeholders.
 
 ## Design rules (Irene's decisions — keep them true in every change)
-### Record player (`src/components/widgets/` — AudioPlayerWidget, RecordDisc, EqualizerIcon)
-Reference: Irene's Pinterest pin https://ca.pinterest.com/pin/677651075230542080/ ("Highest in the Room" player).
+### Record player (`src/components/widgets/` — AudioPlayerWidget, RecordDisc)
+Reference: Irene's Pinterest pin https://ca.pinterest.com/pin/677651075230542080/ ("Highest in the Room" player),
+restyled to Irene's grey design: a grainy grey card (`bg-player bg-grain`) and a grey record.
 - **Fits around its record.** At rest the vinyl is always the card's full width, centred on the card's
   top edge (lower half visible), never shrunk and never cropped by the card's bottom. The card's height comes
   from the record (half the record + the text below); the grid row grows to fit. Never shrink the record
   to fit a fixed card height.
 - **Always a third of its row** (`medium`, 8 of 24 columns). No "Card size" choice in Studio;
   `src/lib/sanity/mappers.ts` fixes it to `medium`. Pair it with a `wide` project.
-- **Looks like vinyl.** Album cover fills the whole disc; the black centre label (30.5% of the disc,
-  from Figma) sits on top of it while it's a record.
-- **Click the whole card to play / pause.** No visible play button — the card is one invisible button
-  (keyboard: focus + Enter/Space).
-- **While playing:** the record spins (one turn per 6s), the equalizer bars bounce, the progress bar
-  fills, and the time counts up under it as "1:15 / 2:26" (current bold, total grey).
-- **Reveal:** on hover (or keyboard focus) the black centre label vanishes *instantly* (no fade), and the
-  cover drops down into the card with "gravity" — a quick fall, a slight overshoot, then floating back to
-  rest (`GRAVITY_EASING`, 700ms) — turning upright at the same time, until it fills the whole card. It shrinks
-  back when the pointer leaves; the label reappears only after the record is back. On touch screens
-  (no hover) the cover is revealed while the song is playing.
-- **Smooth, not choppy:** the reveal animates only transform / border-radius (never height or layout), and the
-  record uses a box-shadow, not a drop-shadow filter.
-- **Text order under the record:** equalizer · artist (grey) · song title (bold) · progress bar · time.
-- **Reduced motion:** no spin, no bounce, no grow animation (states still change, just instantly).
+- **Looks like vinyl.** Album cover (if any) fills the whole disc; the metal centre hub (30.5% of the disc,
+  from Figma — slate ring with a white rim, sunken label, raised cap) sits on top of it while it's a record.
+  Keep the small shadows: the record's soft shadow on the card, the hub's rim + shadow, the sunken label,
+  the pressed-in play button (`--shadow-record`, `--shadow-hub*`, `--shadow-player-button`).
+- **Play / pause:** click the round button (the real `<button>`; keyboard: Tab + Enter/Space) or anywhere on
+  the card. The button shows ▶ paused, ❚❚ playing.
+- **Spins like a vinyl — nothing else moves.** While playing, the record (cover and hub together) spins one
+  turn per 6s (`--animate-record-spin`); paused, it stops where it is. No cover drop-down, no hover reveal.
+- **Smooth, not choppy:** the spin is a CSS animation (rotate only), and the record uses a box-shadow on a
+  still layer (so the shadow doesn't spin), not a drop-shadow filter.
+- **Under the record, centred:** artist (small, grey) · song title (bold) · round play/pause button.
+- **Reduced motion:** no spin, no grow animation (states still change, just instantly).
 
 ## When asked to change something
 1. Find the one file responsible (table above).

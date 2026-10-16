@@ -1,5 +1,4 @@
 import type { RichText as RichTextValue, TextMark } from '../../data/site'
-import { playHoverSound } from '../../lib/hoverSound'
 
 interface RichTextProps {
   text: RichTextValue
@@ -23,12 +22,7 @@ export default function RichText({ text }: RichTextProps) {
     typeof part === 'string' ? (
       part
     ) : (
-      <span
-        key={index}
-        className={markClass[part.mark]}
-        // Highlights snap when hovered; the plain underline stays quiet.
-        onPointerEnter={part.mark === 'underline' ? undefined : playHoverSound}
-      >
+      <span key={index} className={markClass[part.mark]}>
         {part.text}
       </span>
     ),

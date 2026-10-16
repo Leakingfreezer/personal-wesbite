@@ -1,11 +1,12 @@
 import { Link } from 'react-router'
 import { site } from '../../data/site'
+import { playClickSound } from '../../lib/uiSound'
 
 /**
  * The floating white pill at the top of every page. It's `fixed`, so it stays at the top
  * of the screen while you scroll. Its sizes are tokens in globals.css → "Nav sizing".
  * Links point at "/#section" so they work from case-study pages too;
- * ScrollToHash does the actual scrolling.
+ * ScrollToHash does the actual scrolling. The section links make a little click sound.
  */
 export default function Navbar() {
   return (
@@ -33,6 +34,7 @@ export default function Navbar() {
             <li key={link.href}>
               <Link
                 to={link.href}
+                onClick={playClickSound}
                 className="flex h-nav-link items-center rounded-pill px-[clamp(0.625rem,3.4vw,3.15rem)] text-nav font-medium whitespace-nowrap transition-colors duration-200 hover:bg-pill-hover"
               >
                 {link.label}

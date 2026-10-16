@@ -1,30 +1,19 @@
+import { Pause, Play } from 'lucide-react'
 import { useRef, useState } from 'react'
 import type { AudioWidget } from '../../types/gallery'
-import EqualizerIcon from './EqualizerIcon'
 import RecordDisc from './RecordDisc'
 
 interface AudioPlayerWidgetProps {
   widget: AudioWidget
 }
 
-/** 75.4 seconds → "1:15". Shows "–:––" until the length is known. */
-function formatTime(seconds: number): string {
-  if (!Number.isFinite(seconds)) return '–:––'
-  const minutes = Math.floor(seconds / 60)
-  const rest = Math.floor(seconds % 60)
-  return `${minutes}:${rest.toString().padStart(2, '0')}`
-}
-
-/** Phones and tablets can't hover, so the cover reveal works differently there (see isExpanded). */
-const canHover = () => window.matchMedia('(hover: hover)').matches
-
 /**
- * A little record player in the Past Work grid (based on Irene's Pinterest reference).
+ * A little record player in the Past Work grid (Irene's design: grainy grey card, grey record).
  *
- *   • Click anywhere on the card to play / pause (the whole card is one invisible button).
- *   • While playing: the record spins, the equalizer bars bounce, the bar and time count up.
- *   • Hover (or keyboard focus): the record turns upright and grows to show the whole cover.
- *     On touch screens, which can't hover, the cover shows while the song is playing.
+ *   • The record (with the album cover on it) shows its lower half at the top of the card,
+ *     then the artist, the title and a round play / pause button.
+ *   • Click the button — or anywhere on the card — to play or pause.
+ *   • While playing, the record spins like a vinyl; paused, it stops where it is.
  *
  * DESIGN RULE: the card always fits around the record. The record is always the card's full
  * width and never shrinks; the card's height follows from it (half the record + the text
@@ -33,15 +22,9 @@ const canHover = () => window.matchMedia('(hover: hover)').matches
 export default function AudioPlayerWidget({ widget }: AudioPlayerWidgetProps) {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [currentTime, setCurrentTime] = useState(0)
-  const [duration, setDuration] = useState(Number.NaN)
-  const [isHovered, setIsHovered] = useState(false)
-  const [isKeyboardFocused, setIsKeyboardFocused] = useState(false)
 
   const hasTrack = Boolean(widget.audioUrl)
-  const progress = duration > 0 ? currentTime / duration : 0
-  // Only grow when there's a cover to show.
-  const isExpanded = Boolean(widget.cover) && (isHovered || isKeyboardFocused || (!canHover() && isPlaying))
+  const StateIcon = isPlaying ? Pause : Play
 
   function togglePlayback() {
     const audio = audioRef.current
@@ -61,81 +44,48 @@ export default function AudioPlayerWidget({ widget }: AudioPlayerWidgetProps) {
 
   return (
     <div
-      // [container-type:inline-size] lets the record measure the card's width (100cqw).
-      className="relative flex h-full flex-col overflow-hidden rounded-card bg-surface [container-type:inline-size]"
-      onPointerEnter={(event) => event.pointerType === 'mouse' && setIsHovered(true)}
-      onPointerLeave={() => setIsHovered(false)}
+      // [container-type:inline-size] lets the record and button measure the card's width (cqw).
+      className="group relative flex h-full flex-col overflow-hidden rounded-card bg-player bg-grain [container-type:inline-size]"
     >
-      <RecordDisc
-        recordImage={widget.recordImage}
-        cover={widget.cover}
-        isPlaying={isPlaying}
-        isExpanded={isExpanded}
-      />
+      <RecordDisc recordImage={widget.recordImage} cover={widget.cover} isPlaying={isPlaying} />
 
       {/* Reserves the visible half of the record (half the card's width) so the text sits below it. */}
       <div aria-hidden className="aspect-2/1 w-full shrink-0" />
 
-      {/* Equalizer, artist, title, progress bar and time — centred in the space below the record. */}
-      <div className="flex flex-1 flex-col items-center justify-center gap-1 px-4 pt-4 pb-6">
-        <span className="mb-1">
-          <EqualizerIcon isPlaying={isPlaying} />
-        </span>
-        <p className="text-caption text-line">{widget.artist}</p>
-        <p className="text-caption font-semibold">{widget.songTitle}</p>
+      {/* Artist, title and the round play/pause button — centred in the space below the record. */}
+      <div className="flex flex-1 flex-col items-center justify-center px-6 pt-5 pb-6 text-center">
+        <p className="max-w-full truncate text-caption text-ink-muted">{widget.artist}</p>
+        <p className="max-w-full truncate text-nav leading-tight font-semibold tracking-tight">{widget.songTitle}</p>
 
-        {/*
-          Progress bar: a grey track with a dark fill that grows as the song plays.
-          The fill is stretched with scaleX (smooth and cheap for the browser); the short
-          transition smooths the jumps between updates and is off for reduced motion.
-        */}
-        <div
-          role="progressbar"
-          aria-label="Song progress"
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-valuenow={Math.round(progress * 100)}
-          className="mt-2 h-1 w-[min(60%,10rem)] overflow-hidden rounded-full bg-surface-strong"
+        {/* The real play/pause button (keyboard: Tab + Enter/Space). Sits above the card-wide click area. */}
+        <button
+          type="button"
+          onClick={togglePlayback}
+          disabled={!hasTrack}
+          aria-label={buttonLabel}
+          title={buttonLabel}
+          className="relative z-30 mt-4 flex size-[clamp(2.5rem,13cqw,3.5rem)] cursor-pointer items-center justify-center rounded-full bg-ink/15 text-canvas shadow-player-button transition-colors duration-300 group-hover:bg-ink/25 disabled:cursor-default disabled:opacity-60"
         >
-          <div
-            className="h-full origin-left rounded-full bg-ink transition-transform duration-300 ease-linear motion-reduce:transition-none"
-            style={{ transform: `scaleX(${progress})` }}
+          {/* The play triangle is nudged right a touch so it looks centred (its weight sits on the left). */}
+          <StateIcon
+            aria-hidden
+            className={`size-[40%] fill-current ${isPlaying ? '' : 'translate-x-[8%]'}`}
+            strokeWidth={0}
           />
-        </div>
-
-        {/* "1:15 / 2:26" — tabular-nums keeps the digits from jiggling as they change. */}
-        <p className="mt-1 text-caption tabular-nums">
-          <span className="font-semibold">{formatTime(currentTime)}</span>
-          <span className="text-line"> / {formatTime(duration)}</span>
-        </p>
+        </button>
       </div>
 
-      {/* The whole card is the play/pause button. It sits on top of everything, invisible. */}
-      <button
-        type="button"
-        onClick={togglePlayback}
-        disabled={!hasTrack}
-        aria-label={buttonLabel}
-        title={buttonLabel}
-        className="absolute inset-0 z-20 cursor-pointer rounded-card disabled:cursor-default"
-        onFocus={(event) => setIsKeyboardFocused(event.currentTarget.matches(':focus-visible'))}
-        onBlur={() => setIsKeyboardFocused(false)}
-      />
+      {/* Clicking anywhere else on the card plays / pauses too (mouse convenience — keyboard uses the button). */}
+      {hasTrack && <div aria-hidden onClick={togglePlayback} className="absolute inset-0 z-20 cursor-pointer" />}
 
       {hasTrack && (
         <audio
           ref={audioRef}
           src={widget.audioUrl}
-          // Load just the song's length up front, so the total time shows before it's played.
-          preload="metadata"
-          onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)}
+          preload="none"
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
-          onTimeUpdate={(event) => setCurrentTime(event.currentTarget.currentTime)}
-          onEnded={() => {
-            setIsPlaying(false)
-            setCurrentTime(0)
-          }}
+          onEnded={() => setIsPlaying(false)}
         />
       )}
     </div>
