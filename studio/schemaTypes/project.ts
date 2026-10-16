@@ -2,6 +2,19 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 import { cardSizeField, imageField, orderField } from './shared'
 
 /**
+ * Ready-made words for a project's Headline (the label on its Past Work card).
+ * Add or remove words here. "Custom…" lets you type your own in the field below it.
+ */
+const headlineOptions = [
+  { title: 'Scale', value: 'Scale' },
+  { title: 'Launch', value: 'Launch' },
+  { title: 'Growth', value: 'Growth' },
+  { title: 'Redesign', value: 'Redesign' },
+  { title: 'Research', value: 'Research' },
+  { title: 'Custom…', value: 'custom' },
+]
+
+/**
  * A PROJECT — one card in the Past Work grid plus its case-study page at /work/<slug>.
  * Fields are split into tabs (groups) so the editor stays tidy.
  * Publishing uses Sanity's built-in Draft → Publish: the website only ever shows published projects.
@@ -44,6 +57,28 @@ export const project = defineType({
       group: 'basics',
       description: 'e.g. Product Design, UX Research. Shown on the card and case study.',
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'headline',
+      title: 'Headline',
+      type: 'string',
+      group: 'basics',
+      description: 'Optional. A short label on the Past Work card, e.g. "Scale". Pick one, or "Custom…" to type your own.',
+      options: { list: headlineOptions },
+    }),
+    defineField({
+      name: 'customHeadline',
+      title: 'Custom headline',
+      type: 'string',
+      group: 'basics',
+      description: 'Your own word or short phrase, e.g. "Zero to one". Keep it short — it sits in a small label.',
+      // Only shown when "Custom…" is picked above.
+      hidden: ({ parent }) => (parent as { headline?: string } | undefined)?.headline !== 'custom',
+      validation: (rule) =>
+        rule.max(30).custom((value, context) => {
+          const picked = (context.parent as { headline?: string } | undefined)?.headline
+          return picked === 'custom' && !value?.trim() ? 'Type your custom headline, or pick another option.' : true
+        }),
     }),
     defineField({
       name: 'year',

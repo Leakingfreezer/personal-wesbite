@@ -24,6 +24,8 @@ export interface ProjectSummary {
   title: string
   shortDescription: string
   category: string
+  /** Optional short label on the Past Work card, e.g. "Scale" (picked or typed in Studio). */
+  headline?: string
   year: number
   cardSize: CardSize
   order: number

@@ -12,6 +12,7 @@ interface ProjectCardProps {
  * One project in the Past Work grid. The whole card is a link to its case study.
  * It fills whatever space the grid gives it — size is decided in gridVariants.ts.
  *
+ * Top-left: the project's headline label (e.g. "SCALE"), if it has one — set in Studio.
  * Hover/focus: the thumbnail zooms very slightly and the arrow turns to point right.
  * Both are CSS transitions and switch off for reduced motion.
  */
@@ -27,6 +28,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         sizes={imageSizes[project.cardSize]}
         className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
       />
+
+      {project.headline && (
+        <span className="absolute top-4 left-4 rounded-pill bg-charcoal px-3 py-1.5 text-caption font-semibold tracking-wide text-canvas uppercase md:top-5 md:left-5">
+          {project.headline}
+        </span>
+      )}
 
       {/* Bottom row: title label on the left, arrow on the right. */}
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 md:p-5">

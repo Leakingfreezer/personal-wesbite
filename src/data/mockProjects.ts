@@ -51,6 +51,7 @@ export const mockProjects: Project[] = [
     title: 'OneChild Advocacy Hub',
     shortDescription: 'Mock description — replace in Sanity.',
     category: 'Product Design',
+    headline: 'Scale',
     year: 2025,
     cardSize: 'large',
     order: 1,

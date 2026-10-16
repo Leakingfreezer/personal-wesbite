@@ -18,12 +18,19 @@ export function toProjectSummary(doc: SanityProjectSummary): ProjectSummary {
     title: doc.title,
     shortDescription: doc.shortDescription,
     category: doc.category,
+    headline: toHeadline(doc),
     year: doc.year,
     cardSize: doc.cardSize,
     order: doc.order,
     featured: doc.featured ?? false,
     thumbnail: toProjectImage(doc.thumbnail, doc.title),
   }
+}
+
+/** The card's headline label: the preset word, or the typed text when "Custom…" was picked. */
+function toHeadline(doc: SanityProjectSummary): string | undefined {
+  if (doc.headline === 'custom') return doc.customHeadline?.trim() || undefined
+  return doc.headline
 }
 
 export function toProject(doc: SanityProject): Project {

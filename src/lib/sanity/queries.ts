@@ -26,7 +26,7 @@ export const galleryQuery = `
 *[_type in ["project", "audioWidget"] && defined(order) && (_type == "audioWidget" || defined(cardSize))] | order(order asc) {
   _type, _id, order, cardSize,
   _type == "project" => {
-    "slug": slug.current, title, shortDescription, category, year, featured,
+    "slug": slug.current, title, shortDescription, category, headline, customHeadline, year, featured,
     thumbnail ${image}
   },
   _type == "audioWidget" => { artist, songTitle, "audioUrl": audio.asset->url, cover ${image} }
@@ -44,6 +44,9 @@ export interface SanityProjectSummary extends SanityGalleryBase {
   title: string
   shortDescription: string
   category: string
+  /** A preset word ("Scale"…), or "custom" — then the text is in customHeadline. */
+  headline?: string
+  customHeadline?: string
   year: number
   featured?: boolean
   thumbnail?: SanityImage
@@ -78,7 +81,7 @@ export interface SanityTechStack {
 
 export const projectSummariesQuery = `
 *[_type == "project" && defined(slug.current)] | order(order asc) {
-  _type, _id, order, cardSize, "slug": slug.current, title, shortDescription, category, year, featured,
+  _type, _id, order, cardSize, "slug": slug.current, title, shortDescription, category, headline, customHeadline, year, featured,
   thumbnail ${image}
 }`
 
@@ -86,7 +89,7 @@ export const projectSummariesQuery = `
 
 export const projectBySlugQuery = `
 *[_type == "project" && slug.current == $slug][0] {
-  _type, _id, order, cardSize, "slug": slug.current, title, shortDescription, category, year, featured,
+  _type, _id, order, cardSize, "slug": slug.current, title, shortDescription, category, headline, customHeadline, year, featured,
   thumbnail ${image},
   heroImage ${image},
   role, timeline, tools, overview,
