@@ -23,6 +23,7 @@ export function toProjectSummary(doc: SanityProjectSummary): ProjectSummary {
     cardSize: doc.cardSize,
     order: doc.order,
     featured: doc.featured ?? false,
+    comingSoon: doc.comingSoon ?? false,
     thumbnail: toProjectImage(doc.thumbnail, doc.title),
   }
 }

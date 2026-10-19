@@ -125,6 +125,14 @@ export const project = defineType({
       description: 'Marks a highlight project (not used for layout yet).',
       initialValue: false,
     }),
+    defineField({
+      name: 'comingSoon',
+      title: 'Coming soon',
+      type: 'boolean',
+      group: 'grid',
+      description: 'Turn on while the case study isn't ready: the card can't be clicked and shows "Coming soon" on hover.',
+      initialValue: false,
+    }),
 
     /* ── Case study ── */
     defineField({

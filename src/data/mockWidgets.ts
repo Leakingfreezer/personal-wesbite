@@ -11,7 +11,7 @@ import { site } from './site'
 export const mockAudio: AudioWidget = {
   kind: 'audio',
   id: 'now-playing',
-  order: 4,
+  order: 2,
   cardSize: 'medium', // square, so the record card matches the sketch
   artist: 'Artist',
   songTitle: 'Title of Song',

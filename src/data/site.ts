@@ -106,6 +106,8 @@ export const site = {
     heading: 'Past Work',
     /** Shown if there are no published projects yet. */
     emptyMessage: 'New work is on the way — check back soon.',
+    /** Shown on hover over a project whose "Coming soon" switch is on in Studio. */
+    comingSoonLabel: 'Coming soon',
   },
 
   /**

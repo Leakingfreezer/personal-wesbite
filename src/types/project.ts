@@ -30,6 +30,8 @@ export interface ProjectSummary {
   cardSize: CardSize
   order: number
   featured: boolean
+  /** True while the case study isn't ready: the card isn't clickable and shows "Coming soon" on hover. */
+  comingSoon?: boolean
   /** Optional: a light-gray placeholder is shown when missing. */
   thumbnail?: ProjectImage
 }

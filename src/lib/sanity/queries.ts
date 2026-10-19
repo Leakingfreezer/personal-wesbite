@@ -26,7 +26,7 @@ export const galleryQuery = `
 *[_type in ["project", "audioWidget"] && defined(order) && (_type == "audioWidget" || defined(cardSize))] | order(order asc) {
   _type, _id, order, cardSize,
   _type == "project" => {
-    "slug": slug.current, title, shortDescription, category, headline, customHeadline, year, featured,
+    "slug": slug.current, title, shortDescription, category, headline, customHeadline, year, featured, comingSoon,
     thumbnail ${image}
   },
   _type == "audioWidget" => { artist, songTitle, "audioUrl": audio.asset->url, cover ${image} }
@@ -49,6 +49,7 @@ export interface SanityProjectSummary extends SanityGalleryBase {
   customHeadline?: string
   year: number
   featured?: boolean
+  comingSoon?: boolean
   thumbnail?: SanityImage
 }
 
@@ -77,10 +78,10 @@ export interface SanityTechStack {
   tools?: { name: string; logo?: SanityImage }[]
 }
 
-/* ── Project list (used for "Next project") ─────────────────────────────── */
+/* ── Project list (used for "Next project" — skips "Coming soon" projects) ── */
 
 export const projectSummariesQuery = `
-*[_type == "project" && defined(slug.current)] | order(order asc) {
+*[_type == "project" && defined(slug.current) && comingSoon != true] | order(order asc) {
   _type, _id, order, cardSize, "slug": slug.current, title, shortDescription, category, headline, customHeadline, year, featured,
   thumbnail ${image}
 }`

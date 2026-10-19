@@ -27,13 +27,13 @@ import {
  * If Sanity can't be reached, the error is NOT hidden — the page shows "Something went wrong".
  */
 
-/** Projects in display order. */
+/** Projects in display order, without "Coming soon" ones (used for "Next project"). */
 export async function getProjectSummaries(): Promise<ProjectSummary[]> {
   if (sanityClient) {
     const docs = await sanityClient.fetch<SanityProjectSummary[]>(projectSummariesQuery)
     return docs.map(toProjectSummary)
   }
-  return [...mockProjects].sort((a, b) => a.order - b.order)
+  return mockProjects.filter((project) => !project.comingSoon).sort((a, b) => a.order - b.order)
 }
 
 /** Everything in the Past Work grid — projects and the record player — sorted by their `order`. */
