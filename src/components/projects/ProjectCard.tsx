@@ -20,7 +20,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Link
       to={`/work/${project.slug}`}
-      className="group relative block size-full overflow-hidden rounded-card bg-surface"
+      // aspect-4/3 only matters for a `medium` card on phones, the one size with no fixed shape there.
+      className="group relative block aspect-4/3 size-full overflow-hidden rounded-card bg-surface md:aspect-auto"
     >
       {/* Positioned absolutely so a tall thumbnail can never stretch its grid row — it just fills the card. */}
       <ProjectImage
