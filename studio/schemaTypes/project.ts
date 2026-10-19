@@ -130,7 +130,7 @@ export const project = defineType({
       title: 'Coming soon',
       type: 'boolean',
       group: 'grid',
-      description: 'Turn on while the case study isn't ready: the card can't be clicked and shows "Coming soon" on hover.',
+      description: 'Turn on while the case study is not ready: the card cannot be clicked and shows "Coming soon" on hover.',
       initialValue: false,
     }),
 
