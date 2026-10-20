@@ -41,7 +41,7 @@ export const site = {
   name: 'Irene D.',
 
   /** Used by the Contact CTA. TODO: replace with your real address. */
-  email: 'hello@example.com',
+  email: 'i6ding@uwaterloo.ca',
 
   nav: [
     { label: 'Work', href: '/#work' },
@@ -160,7 +160,7 @@ export const site = {
     body: 'Open to thoughtful conversations about product, design, strategy, and creative technology. A project, collaboration, an idea, let’s chat!',
     ctaLabel: 'Explore an Idea Together',
     /** Pre-filled subject line when the CTA opens someone's email app. */
-    emailSubject: 'Hi Irene — an idea to explore',
+    emailSubject: "Here's my idea!",
     /** The big asterisk beside the text. Decorative, so alt is empty. Replace the file to change it. */
     graphic: {
       src: '/assets/illustrations/asterisk.svg',
