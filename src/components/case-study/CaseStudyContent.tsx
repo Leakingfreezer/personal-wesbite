@@ -1,5 +1,6 @@
 import { PortableText, type PortableTextComponents } from '@portabletext/react'
 import type { CaseStudyBlock } from '../../types/project'
+import FlowBlock from './blocks/FlowBlock'
 import GalleryBlock from './blocks/GalleryBlock'
 import ImageBlock from './blocks/ImageBlock'
 import MetricsBlock from './blocks/MetricsBlock'
@@ -18,7 +19,7 @@ const textWidth = 'mx-auto max-w-3xl'
 
 /**
  * How each kind of content looks. To restyle headings, paragraphs, lists or links, edit them here.
- * To restyle a custom block (image, gallery, metrics, quote, table), edit its file in ./blocks/.
+ * To restyle a custom block (image, gallery, metrics, quote, table, flow), edit its file in ./blocks/.
  */
 const components: PortableTextComponents = {
   block: {
@@ -43,6 +44,7 @@ const components: PortableTextComponents = {
     metrics: ({ value }) => <MetricsBlock block={value} />,
     quote: ({ value }) => <QuoteBlock block={value} />,
     table: ({ value }) => <TableBlock block={value} />,
+    flow: ({ value }) => <FlowBlock block={value} />,
   },
 }
 

@@ -8,7 +8,7 @@ import { site } from './site'
 export const audioWidget: AudioWidget = {
   kind: 'audio',
   id: 'now-playing',
-  order: 2,
+  order: 3,
   // Always a third of its row — the record player sizes itself around its record.
   cardSize: 'medium',
   artist: 'Dominic Fike',

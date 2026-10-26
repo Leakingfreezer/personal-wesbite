@@ -1,10 +1,10 @@
 import type { Project, ProjectImage } from '../types/project'
-import { bullets, h2, h3, image, metrics, p, quote, table } from './caseStudyBlocks'
+import { bullets, flow, flowLanes, gallery, h2, h3, image, metrics, p, quote, table } from './caseStudyBlocks'
 
 /**
  * ALL PROJECTS — each entry is one card in the Past Work grid plus its case-study page at /work/<slug>.
  * This file is the site's content store (Sanity is switched off — see src/lib/projects.ts).
- * Images live in /public/assets/projects/. Order 2 is taken by the record player (src/data/widgets.ts).
+ * Images live in /public/assets/projects/. Order 3 is taken by the record player (src/data/widgets.ts).
  *
  * New project: copy an entry, change `slug`, `title`, `order` and `cardSize`.
  * Case-study text is written with the helpers in ./caseStudyBlocks.ts (h2, p, bullets…).
@@ -191,4 +191,225 @@ const oneChild: Project = {
   ],
 }
 
-export const projects: Project[] = [oneChild]
+/* ── Food for Thought ──────────────────────────────────────────────────── */
+// Every `undefined` image below shows a grey placeholder until a real event photo is added.
+
+const fftWorkshop: ProjectImage = {
+  url: '/assets/projects/food-for-thought-workshop-1200.webp',
+  srcSet: '/assets/projects/food-for-thought-workshop-1200.webp 1200w, /assets/projects/food-for-thought-workshop-2400.webp 2400w',
+  alt: 'A Food for Thought cooking workshop in a community hall: young people in aprons work at long tables with portable stoves, pickled carrots and grilled meat, while two participants in front fill bánh mì baguettes.',
+  width: 4896,
+  height: 3672,
+}
+
+const fftPolaroids: ProjectImage = {
+  url: '/assets/projects/food-for-thought-polaroids.webp',
+  alt: 'Four instant-film photos on red leather from a cooking workshop: participants in aprons stirring pans at the stove, and two friends posing with peace signs.',
+  width: 590,
+  height: 787,
+}
+
+const foodForThought: Project = {
+  slug: 'food-for-thought',
+  title: 'Food for Thought',
+  shortDescription:
+    'Founded and scaled a $15K-funded youth initiative, designing and delivering hands-on cultural and creative experiences for young people.',
+  category: 'Product Management · Service Design',
+  headline: 'Launch',
+  year: 2025,
+  cardSize: 'wide',
+  order: 2,
+  featured: false,
+  comingSoon: true,
+  thumbnail: fftWorkshop,
+  heroImage: fftWorkshop,
+  role: 'Founder & Project Lead',
+  timeline: 'Aug 2024 – Nov 2025',
+  tools: [],
+  overview:
+    'Food for Thought began as a youth cooking initiative in Toronto and grew into a recurring community program that brings young people together through food, culture, and shared creative experiences. I led it from concept to execution: I secured over $15,000 in grant funding and coordinated budgets, partners, facilitators, volunteers, venues, procurement, marketing, and workshop delivery. We delivered 10 workshops in under two months, with over 300 participant-attendances. I had to design not only the participant experience, but the operating system behind it.',
+  body: [
+    metrics([
+      ['$15K+', 'grant funding secured'],
+      ['10', 'workshops delivered'],
+      ['300+', 'participant-attendances (not unique participants)'],
+      ['<2', 'months to deliver all ten workshops'],
+    ]),
+
+    h2('A place to make, eat, and belong'),
+    p('Food for Thought started as a concept for a youth cooking and nutrition club.'),
+    p('Early conversations with students and teachers surfaced challenges around food costs, accessible learning, and opportunities for youth to connect. A community dumpling-making experience then showed how food could carry cultural storytelling and social connection.'),
+    p('That reframed the project: from teaching cooking skills to designing a broader community experience.'),
+    flow('The opportunity grew from a class into a service.', [
+      ['Initial idea', 'Run youth cooking classes.'],
+      ['User needs', 'Food costs, accessible learning, and ways for youth to connect.'],
+      ['Expanded service', 'Accessible experiences connecting skills, culture, and community.'],
+    ]),
+    p('**Product direction:** a recurring workshop model that could be delivered across different activities.'),
+
+    h2('Turning an idea into a deliverable'),
+    p('To make the concept executable, I had to define who it was for and what it had to achieve, then plan everything needed to deliver it:'),
+    ...bullets([
+      'Defining the target audience and setting program objectives.',
+      'Preparing grant proposals and securing funding.',
+      'Planning workshop formats, and identifying venues and facilitators.',
+      'Estimating attendance and material needs.',
+      'Coordinating volunteers and stakeholders, and building an execution timeline.',
+    ]),
+    flow('Moving from an initial community idea to an operationally feasible program.', [
+      'Discovery & concept',
+      'Funding & scope',
+      'Partners & resources',
+      'Program delivery',
+      'Feedback & iteration',
+    ]),
+
+    h2('Key product and operational decisions'),
+    table(
+      'Decisions at a glance. The last column is the intended impact, not a measured result.',
+      ['Problem', 'Constraint', 'Decision', 'Intended impact'],
+      [
+        ['High participation barriers', 'Limited participant resources', 'Free workshops', 'Accessible participation'],
+        ['Workshops need meaningful interaction', 'Higher facilitation complexity', 'Collaborative experiences', 'Stronger community connection'],
+        ['Multiple workshops require coordination', 'Tight timeline and small team', 'Standardized operating workflows', 'Repeatable delivery'],
+        ['Organizing team shrank', 'Reduced staffing capacity', 'Reallocated ownership', 'Protect the delivery schedule'],
+      ],
+    ),
+    h3('01 — Accessibility over paid programming'),
+    p('We designed free community workshops rather than charging registration fees, because cost was a known barrier to participation and accessibility was central to the initiative’s purpose.'),
+    ...bullets([
+      '**Constraint:** limited funding and rising material costs.',
+      '**Decision:** secure grants and plan workshop budgets around accessible participation.',
+      '**Trade-off:** greater reliance on funding and strict cost management.',
+      '**Goal:** reduce barriers to youth participation.',
+    ]),
+    h3('02 — Shared experiences over traditional instruction'),
+    p('We designed hands-on, collaborative activities rather than lecture-based sessions, because the program aimed to create both practical learning and social connection.'),
+    ...bullets([
+      '**Constraint:** collaborative workshops need more materials, facilitators, and setup.',
+      '**Decision:** build in shared making, eating, discussion, and creative activities.',
+      '**Trade-off:** more operational complexity.',
+      '**Goal:** experiences where youth could learn and connect.',
+    ]),
+    h3('03 — Repeatable operations over one-off planning'),
+    p('We standardized workshop planning rather than rebuilding the process for every event, because delivering 10 workshops in under two months required consistent coordination across suppliers, facilitators, and volunteers.'),
+    ...bullets([
+      '**Constraint:** limited organizing capacity and multiple delivery dependencies.',
+      '**Decision:** repeatable workshop briefs, checklists, assignments, and preparation workflows.',
+      '**Trade-off:** more process design up front.',
+      '**Goal:** less coordination overhead and lower delivery risk.',
+    ]),
+    h3('04 — Clear ownership over the original team structure'),
+    p('When the core organizing team went from six people to three, we reallocated responsibilities rather than keeping the original role structure.'),
+    ...bullets([
+      '**Constraint:** reduced team capacity during active delivery.',
+      '**Decision:** clarify ownership, redistribute tasks, and run preparation in parallel.',
+      '**Trade-off:** more responsibility concentrated on fewer organizers.',
+      '**Goal:** protect delivery commitments while keeping program quality.',
+    ]),
+
+    h2('The workshop wasn’t the entire experience'),
+    p('I designed the participant journey beyond the activity itself: how people found out about a workshop, registered, arrived, took part, and connected afterward.'),
+    flow('The participant journey.', [
+      ['Discover', 'Hear about a workshop.'],
+      ['Register', 'Sign up for a spot.'],
+      ['Arrive', 'Find the venue and check in.'],
+      ['Settle in', 'Meet the group and the facilitator.'],
+      ['Make together', 'The hands-on activity.'],
+      ['Eat & share', 'Share what was made.'],
+      ['Stay', 'Keep the conversation going.'],
+      ['Return', 'Come back for the next one.'],
+    ]),
+    quote('The activity was the reason people arrived, but the surrounding experience created the opportunities for connection.', 'Key insight'),
+    gallery([fftPolaroids, undefined], 'Instant photos from a cooking workshop. [Photo needed: a shared meal or group moment.]'),
+
+    h2('An operating system for ten workshops'),
+    p('Behind every workshop ran the same backstage process. Each step depended on the one before it, and all of it existed to make the frontstage experience feel simple.'),
+    flowLanes('A service blueprint: what participants saw, and what made it possible.', [
+      ['Frontstage — what participants experience', ['Discover', 'Register', 'Arrive', 'Participate', 'Share', 'Leave feedback']],
+      [
+        'Backstage — what makes it possible',
+        [
+          'Program planning',
+          'Workshop brief',
+          'Facilitator confirmation',
+          'Attendance forecasting',
+          'Resource estimation',
+          'Procurement',
+          'Venue setup',
+          'Volunteer assignment',
+          'Delivery',
+          'Feedback review',
+        ],
+      ],
+    ]),
+    h3('Five workstreams, one timeline'),
+    table(
+      'Every workstream fed into one shared delivery timeline.',
+      ['Workstream', 'What it covered'],
+      [
+        ['Programming', 'Workshop concepts and facilitators'],
+        ['Operations', 'Venues, supplies, equipment, and timelines'],
+        ['People', 'Volunteers, participant communications, and stakeholder coordination'],
+        ['Finance', 'Budget allocation, procurement, and grant reporting'],
+        ['Marketing', 'Outreach, registration, and promotional content'],
+      ],
+    ),
+    h3('What running it took'),
+    ...bullets([
+      '**Scope and resource allocation:** fitting ten workshops’ materials, venues, and supplies inside one fixed grant budget.',
+      '**Dependency mapping:** the backstage steps ran in order, so facilitators were confirmed before attendance was forecast, and quantities were estimated before anything was bought.',
+      '**Process standardization:** the same workshop brief, checklist, and preparation workflow for every session.',
+      '**Stakeholder coordination:** facilitators, volunteers, venues, suppliers, and funders working to one timeline.',
+      '**Operational risk management:** below.',
+    ]),
+
+    h2('Designing for what happens when plans fail'),
+    p('During one cooking workshop, an ingredient shortage threatened the activity. The team worked around it during the event to keep things moving. Afterward, I revised the preparation procedures and quantity-planning steps to make a repeat less likely.'),
+    flow('A continuous-improvement loop: each fix fed back into preparation for the next workshop.', [
+      'Issue identified',
+      'Immediate workaround',
+      'Root cause review',
+      'SOP update',
+      'Future risk mitigation',
+    ]),
+    h3('Team capacity changed mid-delivery'),
+    ...bullets([
+      '**Situation:** the organizing team went from six people to three.',
+      '**Action:** reassigned responsibilities and clarified ownership.',
+      '**Outcome:** the delivery schedule held.',
+      '**Lesson:** clear accountability matters more as resources get tighter.',
+    ]),
+
+    h2('What we deliberately left out'),
+    p('Prioritizing also meant deciding what not to build for the initial program. These calls were made early, weighing the team’s capacity against the return each would bring:'),
+    ...bullets([
+      '**Expansion into additional communities.**',
+      '**Custom event registration software.**',
+      '**Large-scale automated operations:** for a program of this size, the return didn’t justify the people-hours it would take.',
+    ]),
+    p('**The principle:** focus resources on delivering a repeatable, accessible experience before expanding the infrastructure around it.'),
+
+    h2('Ten workshops. One community.'),
+    p('Cooking, pottery painting, and floral workshops: different activities, all running on the same service model.'),
+    gallery([undefined, undefined], '[Photos needed: cooking workshop, with participants making food together.]'),
+    gallery([undefined, undefined], '[Photos needed: pottery painting and floral workshops, and what participants made.]'),
+
+    h2('A concept became a delivered community program'),
+    p('Alongside the results above, the project delivered:'),
+    ...bullets([
+      'A funded community workshop series.',
+      'Multiple practical and creative experiences.',
+      'Coordination of facilitators and volunteers.',
+      'Repeatable program preparation processes.',
+      'Event delivery and operating documentation.',
+    ]),
+
+    h2('Reflection'),
+    p('I learned that the participant experience depends on everything happening behind it. What people see might be a group cooking together, but its quality depends on decisions made much earlier: budgeting, procurement, venue requirements, preparation timelines, staffing, and participant communications.'),
+    p('Food for Thought taught me to treat community programming as a service, with interconnected users, resources, and operational dependencies.'),
+    quote('Designing a great experience means designing both the interaction and the system that makes it possible.'),
+  ],
+}
+
+export const projects: Project[] = [oneChild, foodForThought]

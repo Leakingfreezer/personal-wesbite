@@ -11,5 +11,10 @@ export const techStack: TechStack = {
     { name: 'Notion', logoUrl: '/assets/tech/notion.svg' },
     { name: 'Jira', logoUrl: '/assets/tech/jira.svg' },
     { name: 'Python', logoUrl: '/assets/tech/python.svg' },
+    { name: 'React', logoUrl: '/assets/tech/react.svg' },
+    { name: 'Next.js', logoUrl: '/assets/tech/nextjs.svg' },
+    { name: 'Tailwind CSS', logoUrl: '/assets/tech/tailwindcss.svg' },
+    { name: 'Java', logoUrl: '/assets/tech/java.svg' },
+    { name: 'SQL', logoUrl: '/assets/tech/sql.svg' },
   ],
 }

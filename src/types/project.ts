@@ -86,7 +86,15 @@ export interface TableBlock {
   rows: { _key: string; cells: string[] }[]
 }
 
-export type CaseStudyBlock = PortableTextBlock | ImageBlock | GalleryBlock | MetricsBlock | QuoteBlock | TableBlock
+/** Steps joined by arrows (a roadmap, a journey…). Two or more lanes stack, e.g. frontstage over backstage. */
+export interface FlowBlock {
+  _type: 'flow'
+  _key: string
+  caption?: string
+  lanes: { _key: string; label?: string; steps: { title: string; description?: string }[] }[]
+}
+
+export type CaseStudyBlock = PortableTextBlock | ImageBlock | GalleryBlock | MetricsBlock | QuoteBlock | TableBlock | FlowBlock
 
 /** Full case-study data for /work/:slug. */
 export interface Project extends ProjectSummary {

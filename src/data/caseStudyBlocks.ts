@@ -1,5 +1,5 @@
 import type { PortableTextBlock } from '@portabletext/react'
-import type { ImageBlock, MetricsBlock, ProjectImage, QuoteBlock, TableBlock } from '../types/project'
+import type { FlowBlock, GalleryBlock, ImageBlock, MetricsBlock, ProjectImage, QuoteBlock, TableBlock } from '../types/project'
 
 /**
  * SMALL HELPERS FOR WRITING A CASE STUDY in src/data/projects.ts.
@@ -13,6 +13,9 @@ import type { ImageBlock, MetricsBlock, ProjectImage, QuoteBlock, TableBlock } f
  *   quote('Text', 'Who said it')           → pulled-out quote
  *   table('Caption', [columns], [[row]])   → comparison table
  *   image({ url, alt, width, height }, 'Caption')  → big image (leave out the image for a placeholder)
+ *   gallery([photoA, photoB], 'Caption')   → images side by side (undefined = placeholder)
+ *   flow('Caption', [steps])               → steps joined by arrows; a step is 'Title' or ['Title', 'Short description']
+ *   flowLanes('Caption', [['Lane label', [steps]], …])  → several flows stacked, e.g. frontstage over backstage
  */
 
 /** Every piece needs a unique key so React can tell them apart. A counter is enough. */
@@ -57,4 +60,26 @@ export function table(caption: string, columns: string[], rows: string[][]): Tab
 
 export function image(picture: ProjectImage | undefined, caption?: string): ImageBlock {
   return { _type: 'imageBlock', _key: key(), image: picture, caption }
+}
+
+export function gallery(pictures: (ProjectImage | undefined)[], caption?: string): GalleryBlock {
+  return { _type: 'gallery', _key: key(), images: pictures, caption }
+}
+
+/** A step is just its title, or [title, short description]. */
+type Step = string | [title: string, description: string]
+
+const toStep = (step: Step) => (typeof step === 'string' ? { title: step } : { title: step[0], description: step[1] })
+
+export function flow(caption: string | undefined, steps: Step[]): FlowBlock {
+  return { _type: 'flow', _key: key(), caption, lanes: [{ _key: key(), steps: steps.map(toStep) }] }
+}
+
+export function flowLanes(caption: string | undefined, lanes: [label: string, steps: Step[]][]): FlowBlock {
+  return {
+    _type: 'flow',
+    _key: key(),
+    caption,
+    lanes: lanes.map(([label, steps]) => ({ _key: key(), label, steps: steps.map(toStep) })),
+  }
 }
