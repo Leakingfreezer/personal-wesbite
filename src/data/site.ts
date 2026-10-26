@@ -1,7 +1,7 @@
 /**
  * SITE CONTENT — edit text, links and fixed images here.
  * Components read from this file; they never hardcode copy.
- * (Projects are NOT here — they come from Sanity, or mockProjects.ts during development.)
+ * (Projects are NOT here — they live in src/data/projects.ts.)
  */
 
 import { Box, PenTool, Target, Users, type LucideIcon } from 'lucide-react'

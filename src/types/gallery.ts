@@ -2,7 +2,7 @@
  * Everything that can sit in the Past Work grid: project cards plus the record-player widget.
  * Each item has a `kind`, so ProjectGrid knows which component to draw,
  * and its own `order` + `cardSize`, so widgets slot in between projects.
- * In Phase 6 the widgets become their own document types in Sanity Studio.
+ * Content for both lives in src/data/ (projects.ts, widgets.ts).
  */
 import type { CardSize, ProjectImage, ProjectSummary } from './project'
 

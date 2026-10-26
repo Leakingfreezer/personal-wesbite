@@ -8,7 +8,9 @@ the wireframe is `docs/wireframe.png`. Work phase by phase and ask for approval 
 
 ## Stack
 React 19 + TypeScript (strict) · Vite · Tailwind CSS v4 · React Router v7 (data router) ·
-Sanity (headless CMS, Studio lives in `studio/`) · Motion for React (sparingly) · Lucide icons.
+Motion for React (sparingly) · Lucide icons.
+**Content = local files in `src/data/`** (Irene's choice, 2026-10-26: Irene tells Claude what to change, Claude edits
+the files). Sanity (headless CMS, Studio in `studio/`) is **switched off but kept** — `USE_SANITY` in `src/lib/projects.ts`.
 Deployed on Vercel as an SPA (`vercel.json` rewrites all paths to `index.html`).
 
 Do not add frameworks, state libraries, UI kits, or databases without asking first,
@@ -20,17 +22,18 @@ and explain what any new dependency does before installing it.
 | Colours, fonts, type scale, radii | `src/styles/globals.css` (`@theme` tokens) |
 | Site copy, email, nav links, fixed image paths | `src/data/site.ts` |
 | Project data types | `src/types/project.ts` |
-| Fetching projects (Sanity or mock fallback) | `src/lib/projects.ts` |
-| GROQ queries | `src/lib/sanity/queries.ts` |
+| Projects + case studies (content) | `src/data/projects.ts` · writing helpers `src/data/caseStudyBlocks.ts` · images `public/assets/projects/` |
+| Loading content (local files; Sanity switch) | `src/lib/projects.ts` |
+| GROQ queries (unused while Sanity is off) | `src/lib/sanity/queries.ts` |
 | Card size → grid span mapping | `src/components/projects/gridVariants.ts` |
 | Past Work grid items (projects + record player) types | `src/types/gallery.ts` |
-| Record player widget | `src/components/widgets/` (mock data: `src/data/mockWidgets.ts`) |
-| Tech stack reel (About) | `src/components/about/TechStackReel.tsx` · type `src/types/techStack.ts` · data: Sanity "Tech stack" (mock: `src/data/mockTechStack.ts`) · logos `public/assets/tech/` |
+| Record player widget | `src/components/widgets/` (data: `src/data/widgets.ts` · song/cover `public/assets/widgets/`) |
+| Tech stack reel (About) | `src/components/about/TechStackReel.tsx` · type `src/types/techStack.ts` · data: `src/data/techStack.ts` · logos `public/assets/tech/` |
 | Routes | `src/router.tsx` |
-| Sanity schemas | `studio/schemaTypes/` |
+| Sanity schemas (unused while Sanity is off) | `studio/schemaTypes/` |
 
 ## Rules
-- **Content never lives in JSX.** Copy → `site.ts`. Projects → Sanity (mock data in `src/data/mockProjects.ts`).
+- **Content never lives in JSX.** Copy → `site.ts`. Projects → `src/data/projects.ts`.
 - **Visual components never fetch.** Data is loaded by route loaders via `src/lib/projects.ts` and passed down as typed props.
 - **One component, one job.** Sections compose smaller components; no giant multi-section files.
 - **Use tokens, not raw values.** No hex codes or px font sizes in components — add a token in `globals.css` instead.
@@ -39,7 +42,7 @@ and explain what any new dependency does before installing it.
 - **Respect reduced motion** for every animation and smooth scroll.
 - **Accessibility:** semantic HTML, one `h1` per page, visible focus states, real alt text, links for navigation / buttons for actions.
 - **Never commit secrets.** Only `VITE_SANITY_PROJECT_ID` / `VITE_SANITY_DATASET` (public, read-only) go in env vars. No write tokens in the frontend.
-- **Public routes show published content only** (Sanity `perspective: 'published'`).
+- **If Sanity is switched back on:** public routes show published content only (`perspective: 'published'`).
 - Don't recreate Irene's 3D artwork with CSS/emoji — use her exported assets or labeled placeholders.
 
 ## Design rules (Irene's decisions — keep them true in every change)
@@ -51,7 +54,7 @@ restyled to Irene's grey design: a grainy grey card (`bg-player bg-grain`) and a
   from the record (half the record + the text below); the grid row grows to fit. Never shrink the record
   to fit a fixed card height.
 - **Always a third of its row** (`medium`, 8 of 24 columns). No "Card size" choice in Studio;
-  `src/lib/sanity/mappers.ts` fixes it to `medium`. Pair it with a `wide` project.
+  `src/data/widgets.ts` (and `src/lib/sanity/mappers.ts`) fix it to `medium`. Pair it with a `wide` project.
 - **Looks like vinyl.** Album cover (if any) fills the whole disc; the metal centre hub (30.5% of the disc,
   from Figma — slate ring with a white rim, sunken label, raised cap) sits on top of it while it's a record.
   Keep the small shadows: the record's soft shadow on the card, the hub's rim + shadow, the sunken label,
@@ -70,7 +73,7 @@ restyled to Irene's grey design: a grainy grey card (`bg-player bg-grain`) and a
 2. Make the smallest change that does it; don't touch unrelated files.
 3. Replacing an image = change the asset reference only.
 4. Styling change = don't touch content data or queries.
-5. New project = a new Sanity entry, never a new page component.
+5. New project = a new entry in `src/data/projects.ts`, never a new page component.
 6. Briefly explain the change and where future edits of that kind belong.
 7. Ask before making major design decisions.
 

@@ -1,10 +1,10 @@
 import type { TechStack } from '../types/techStack'
 
 /**
- * MOCK TECH STACK — used until you publish a "Tech stack" document in Sanity Studio.
- * After that, edit your tools in Studio instead. Logos live in /public/assets/tech/.
+ * THE TECH STACK reel in the About section. Logos live in /public/assets/tech/.
+ * (Sanity is switched off — see src/lib/projects.ts — so this file is what the site shows.)
  */
-export const mockTechStack: TechStack = {
+export const techStack: TechStack = {
   prefix: 'techstack/',
   tools: [
     { name: 'Figma', logoUrl: '/assets/tech/figma.svg' },

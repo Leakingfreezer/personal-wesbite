@@ -1,6 +1,6 @@
 /**
  * The tech stack shown in the About section's slot-machine reel.
- * Comes from Sanity ("Tech stack" in Studio), or src/data/mockTechStack.ts until you publish one.
+ * Comes from src/data/techStack.ts.
  */
 
 /** One app or language in the reel. */

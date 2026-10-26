@@ -11,7 +11,7 @@ interface AboutProps {
 /**
  * Section 2: introduction on the left (with marker highlights), the tech-stack slot-machine reel on the right.
  * Stacks into one column on phones (text first, card below).
- * Text and highlights → src/data/site.ts (about). Tools → Sanity ("Tech stack"), or src/data/mockTechStack.ts.
+ * Text and highlights → src/data/site.ts (about). Tools → src/data/techStack.ts.
  */
 export default function About({ techStack }: AboutProps) {
   const { greeting, greetingEmoji, program, bio } = site.about

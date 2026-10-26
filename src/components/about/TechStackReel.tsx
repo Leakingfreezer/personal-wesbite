@@ -38,7 +38,7 @@ function shuffle<T>(items: T[]): T[] {
  * like bento.me/username. Every tool appears once; each spin lands on the next one in order
  * (Figma, then Notion, then Jira…). It only spins while it's on screen.
  * With reduced motion it swaps tools instantly instead of scrolling.
- * Prefix and tools come from Sanity ("Tech stack" in Studio), or src/data/mockTechStack.ts.
+ * Prefix and tools come from src/data/techStack.ts.
  */
 export default function TechStackReel({ techStack, className = '' }: TechStackReelProps) {
   const { prefix, tools } = techStack
