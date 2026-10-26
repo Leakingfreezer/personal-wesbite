@@ -4,6 +4,7 @@ import GalleryBlock from './blocks/GalleryBlock'
 import ImageBlock from './blocks/ImageBlock'
 import MetricsBlock from './blocks/MetricsBlock'
 import QuoteBlock from './blocks/QuoteBlock'
+import TableBlock from './blocks/TableBlock'
 
 interface CaseStudyContentProps {
   body: CaseStudyBlock[]
@@ -17,7 +18,7 @@ const textWidth = 'mx-auto max-w-3xl'
 
 /**
  * How each kind of content looks. To restyle headings, paragraphs, lists or links, edit them here.
- * To restyle a custom block (image, gallery, metrics, quote), edit its file in ./blocks/.
+ * To restyle a custom block (image, gallery, metrics, quote, table), edit its file in ./blocks/.
  */
 const components: PortableTextComponents = {
   block: {
@@ -41,6 +42,7 @@ const components: PortableTextComponents = {
     gallery: ({ value }) => <GalleryBlock block={value} />,
     metrics: ({ value }) => <MetricsBlock block={value} />,
     quote: ({ value }) => <QuoteBlock block={value} />,
+    table: ({ value }) => <TableBlock block={value} />,
   },
 }
 

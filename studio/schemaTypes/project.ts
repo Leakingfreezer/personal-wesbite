@@ -188,6 +188,7 @@ export const project = defineType({
         defineArrayMember({ type: 'gallery' }),
         defineArrayMember({ type: 'metrics' }),
         defineArrayMember({ type: 'quote' }),
+        defineArrayMember({ type: 'table' }),
       ],
     }),
     defineField({
@@ -202,12 +203,28 @@ export const project = defineType({
           fields: [
             defineField({ name: 'label', title: 'Label', type: 'string', validation: (rule) => rule.required() }),
             defineField({
+              name: 'comingSoon',
+              title: 'Coming soon',
+              type: 'boolean',
+              description: 'Turn on when there is no URL yet: it shows as "Label — Coming soon", not clickable.',
+              initialValue: false,
+            }),
+            defineField({
               name: 'url',
               title: 'URL',
               type: 'url',
-              validation: (rule) => rule.required().uri({ scheme: ['http', 'https'] }),
+              hidden: ({ parent }) => parent?.comingSoon === true,
+              validation: (rule) =>
+                rule.uri({ scheme: ['http', 'https'] }).custom((url, context) => {
+                  const parent = context.parent as { comingSoon?: boolean } | undefined
+                  return url || parent?.comingSoon ? true : 'Add a URL, or turn on "Coming soon".'
+                }),
             }),
           ],
+          preview: {
+            select: { title: 'label', url: 'url', comingSoon: 'comingSoon' },
+            prepare: ({ title, url, comingSoon }) => ({ title, subtitle: comingSoon ? 'Coming soon' : url }),
+          },
         }),
       ],
     }),

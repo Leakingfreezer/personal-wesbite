@@ -93,6 +93,57 @@ export const metrics = defineType({
   },
 })
 
+export const table = defineType({
+  name: 'table',
+  title: 'Table',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'caption',
+      title: 'Caption',
+      type: 'string',
+      description: 'Optional. What the table shows, e.g. "Key product decisions at a glance".',
+    }),
+    defineField({
+      name: 'columns',
+      title: 'Column headings',
+      type: 'array',
+      of: [defineArrayMember({ type: 'string' })],
+      validation: (rule) => rule.required().min(2).max(5),
+    }),
+    defineField({
+      name: 'rows',
+      title: 'Rows',
+      type: 'array',
+      description: 'One cell per column, in the same order. The first cell is the row heading.',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'tableRow',
+          fields: [
+            defineField({
+              name: 'cells',
+              title: 'Cells',
+              type: 'array',
+              of: [defineArrayMember({ type: 'string' })],
+              validation: (rule) => rule.required().min(1),
+            }),
+          ],
+          preview: {
+            select: { first: 'cells.0', second: 'cells.1' },
+            prepare: ({ first, second }) => ({ title: first || 'Row', subtitle: second }),
+          },
+        }),
+      ],
+      validation: (rule) => rule.required().min(1),
+    }),
+  ],
+  preview: {
+    select: { caption: 'caption', first: 'columns.0' },
+    prepare: ({ caption, first }) => ({ title: caption || first || 'Table', subtitle: 'Table block' }),
+  },
+})
+
 export const quote = defineType({
   name: 'quote',
   title: 'Quote',

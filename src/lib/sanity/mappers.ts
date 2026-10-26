@@ -2,7 +2,7 @@ import type { PortableTextBlock } from '@portabletext/react'
 import { site } from '../../data/site'
 import type { GalleryItem } from '../../types/gallery'
 import type { TechStack } from '../../types/techStack'
-import type { CaseStudyBlock, Project, ProjectSummary } from '../../types/project'
+import type { CaseStudyBlock, ExternalLink, Project, ProjectSummary } from '../../types/project'
 import { toImageUrl, toProjectImage } from './image'
 import type { SanityBodyItem, SanityGalleryDoc, SanityProject, SanityProjectSummary, SanityTechStack } from './queries'
 
@@ -42,9 +42,15 @@ export function toProject(doc: SanityProject): Project {
     tools: doc.tools ?? [],
     overview: doc.overview,
     heroImage: toProjectImage(doc.heroImage, doc.title),
-    links: doc.links,
+    links: doc.links?.flatMap(toExternalLink),
     body: doc.body?.map(toBodyBlock),
   }
+}
+
+/** "Coming soon" links keep only their label; a normal link without a URL is skipped rather than broken. */
+function toExternalLink(link: NonNullable<SanityProject['links']>[number]): ExternalLink[] {
+  if (link.comingSoon) return [{ label: link.label, comingSoon: true }]
+  return link.url ? [{ label: link.label, url: link.url }] : []
 }
 
 /** Custom blocks need their images converted; everything else is already the right shape. */
@@ -63,6 +69,14 @@ function toBodyBlock(item: SanityBodyItem): CaseStudyBlock {
       return { _type: 'metrics', _key: item._key, items: item.items ?? [] }
     case 'quote':
       return item
+    case 'table':
+      return {
+        _type: 'table',
+        _key: item._key,
+        caption: item.caption,
+        columns: item.columns ?? [],
+        rows: (item.rows ?? []).map((row) => ({ _key: row._key, cells: row.cells ?? [] })),
+      }
     case 'block':
       // Plain text blocks (headings, paragraphs, lists) are already Portable Text.
       return item as unknown as PortableTextBlock

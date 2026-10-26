@@ -36,10 +36,8 @@ export interface ProjectSummary {
   thumbnail?: ProjectImage
 }
 
-export interface ExternalLink {
-  label: string
-  url: string
-}
+/** A live site, prototype, repo… With `comingSoon`, it shows as plain text with no URL yet. */
+export type ExternalLink = { label: string; url: string; comingSoon?: false } | { label: string; comingSoon: true }
 
 /* ── Case-study content blocks ────────────────────────────────────────────
  * A case study's `body` is Portable Text (Sanity's rich-text format): normal text blocks
@@ -79,7 +77,16 @@ export interface QuoteBlock {
   attribution?: string
 }
 
-export type CaseStudyBlock = PortableTextBlock | ImageBlock | GalleryBlock | MetricsBlock | QuoteBlock
+/** A small comparison table: column headings, then rows of text cells. */
+export interface TableBlock {
+  _type: 'table'
+  _key: string
+  caption?: string
+  columns: string[]
+  rows: { _key: string; cells: string[] }[]
+}
+
+export type CaseStudyBlock = PortableTextBlock | ImageBlock | GalleryBlock | MetricsBlock | QuoteBlock | TableBlock
 
 /** Full case-study data for /work/:slug. */
 export interface Project extends ProjectSummary {

@@ -94,7 +94,7 @@ export const projectBySlugQuery = `
   thumbnail ${image},
   heroImage ${image},
   role, timeline, tools, overview,
-  links[]{ label, url },
+  links[]{ label, url, comingSoon },
   body[]{
     ...,
     _type == "imageBlock" => { _type, _key, caption, image ${image} },
@@ -109,6 +109,7 @@ export type SanityBodyItem =
   | { _type: 'gallery'; _key: string; images?: SanityImage[]; caption?: string }
   | { _type: 'metrics'; _key: string; items?: { value: string; label: string }[] }
   | { _type: 'quote'; _key: string; text: string; attribution?: string }
+  | { _type: 'table'; _key: string; caption?: string; columns?: string[]; rows?: { _key: string; cells?: string[] }[] }
 
 export interface SanityProject extends SanityProjectSummary {
   heroImage?: SanityImage
@@ -116,6 +117,7 @@ export interface SanityProject extends SanityProjectSummary {
   timeline?: string
   tools?: string[]
   overview: string
-  links?: { label: string; url: string }[]
+  /** `url` is only required in Studio when "Coming soon" is off. */
+  links?: { label: string; url?: string; comingSoon?: boolean }[]
   body?: SanityBodyItem[]
 }

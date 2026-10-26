@@ -138,6 +138,8 @@ export const site = {
     timelineLabel: 'Timeline',
     toolsLabel: 'Tools',
     linksLabel: 'Links',
+    /** After a link's label when it has no URL yet, e.g. "Live website — Coming soon". */
+    linkComingSoon: 'Coming soon',
     nextLabel: 'Next project',
     /** Shown where a case-study image hasn't been uploaded yet. */
     imagePlaceholder: 'Image placeholder',

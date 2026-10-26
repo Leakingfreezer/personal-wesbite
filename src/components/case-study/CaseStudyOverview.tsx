@@ -29,10 +29,17 @@ export default function CaseStudyOverview({ project }: CaseStudyOverviewProps) {
           <Detail label={labels.linksLabel}>
             <ul className="space-y-1">
               {project.links.map((link) => (
-                <li key={link.url}>
-                  <a href={link.url} target="_blank" rel="noreferrer" className="underline underline-offset-4">
-                    {link.label}
-                  </a>
+                <li key={link.label}>
+                  {link.comingSoon ? (
+                    // Not a link yet — plain text, so nothing pretends to be clickable.
+                    <span className="text-ink-muted">
+                      {link.label} — {labels.linkComingSoon}
+                    </span>
+                  ) : (
+                    <a href={link.url} target="_blank" rel="noreferrer" className="underline underline-offset-4">
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
