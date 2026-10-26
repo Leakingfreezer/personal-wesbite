@@ -12,18 +12,29 @@ import { bullets, h2, h3, image, metrics, p, quote, table } from './caseStudyBlo
 
 /* ── OneChild ──────────────────────────────────────────────────────────── */
 
-const oneChildImac: ProjectImage = {
-  url: '/assets/projects/onechild-opportunities-board-1600.webp',
-  srcSet:
-    '/assets/projects/onechild-opportunities-board-800.webp 800w, /assets/projects/onechild-opportunities-board-1600.webp 1600w',
-  alt: 'The OneChild Opportunities Board shown on an iMac: a grid of youth events, grants and internships with one opened in a side panel.',
+/** Both prototypes in browser windows: square for the Past Work card, wide for the case-study header. */
+const mockupAlt =
+  'Two OneChild Advocacy Hub screens in browser windows: the Opportunities Board, a grid of youth events, grants and internships, and in front of it the Advocacy Footprint, with a profile, skills, past experiences and a goal planner.'
+
+const oneChildMockupSquare: ProjectImage = {
+  url: '/assets/projects/onechild-mockup-square-1600.webp',
+  srcSet: '/assets/projects/onechild-mockup-square-800.webp 800w, /assets/projects/onechild-mockup-square-1600.webp 1600w',
+  alt: mockupAlt,
   width: 1600,
-  height: 1089,
+  height: 1600,
+}
+
+const oneChildMockupWide: ProjectImage = {
+  url: '/assets/projects/onechild-mockup-wide-1200.webp',
+  srcSet: '/assets/projects/onechild-mockup-wide-1200.webp 1200w, /assets/projects/onechild-mockup-wide-2400.webp 2400w',
+  alt: mockupAlt,
+  width: 2400,
+  height: 1500,
 }
 
 const oneChildBoardScreen: ProjectImage = {
   url: '/assets/projects/onechild-opportunities-board-screen.png',
-  alt: 'The Opportunities Board: location and type filters (Event, Internship, Challenge, Grant), a grid of opportunity cards, and the Youth Voices Summit 2027 opened in a side panel with its description, requirements, contact and the skills you will gain.',
+  alt: 'The Opportunities Board: a header illustration of five young people sitting together, location and type filters (Event, Internship, Challenge, Grant), a grid of opportunity cards, and the Youth Voices Summit 2027 opened in a side panel with its description, requirements, contact and the skills you will gain.',
   width: 1463,
   height: 1189,
 }
@@ -61,15 +72,15 @@ const oneChild: Project = {
   title: 'OneChild Advocacy Hub',
   shortDescription:
     'Designed and built a youth advocacy platform that connects young people to opportunities, resources, and tools to document their advocacy journeys.',
-  category: 'Product Design',
+  category: 'Product Engineering',
   headline: '0→1',
   year: 2026,
   cardSize: 'medium',
   order: 1,
   featured: false,
   comingSoon: false,
-  thumbnail: oneChildImac,
-  heroImage: oneChildImac,
+  thumbnail: oneChildMockupSquare,
+  heroImage: oneChildMockupWide,
   role: 'Product Engineer',
   timeline: 'May – Aug 2026',
   tools: ['Figma', 'FigJam', 'Framer', 'Framer CMS', 'Supabase'],

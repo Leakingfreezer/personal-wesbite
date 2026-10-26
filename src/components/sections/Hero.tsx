@@ -8,7 +8,7 @@ import { site } from '../../data/site'
  * Text, pills and photo → src/data/site.ts (hero).
  */
 export default function Hero() {
-  const { headline, lead, skills, outro, outroEmphasis, outroGraphic, photo, photoPlaceholder } = site.hero
+  const { headline, lead, skills, outro, outroEmphasis, outroGraphic, photo, photoCaption, photoPlaceholder } = site.hero
 
   return (
     <section id="home" className="mx-auto max-w-page px-6 pt-hero-top pb-8 md:px-12 md:pb-12 lg:px-20">
@@ -39,7 +39,12 @@ export default function Hero() {
           </p>
         </div>
 
-        <HeroPhoto photo={photo} placeholderLabel={photoPlaceholder} className="mx-auto w-full max-w-hero-photo lg:mr-0" />
+        <HeroPhoto
+          photo={photo}
+          placeholderLabel={photoPlaceholder}
+          caption={photoCaption}
+          className="mx-auto w-full max-w-hero-photo lg:mr-0"
+        />
       </div>
     </section>
   )

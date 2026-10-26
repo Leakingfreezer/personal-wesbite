@@ -79,9 +79,11 @@ export const site = {
      * (e.g. '/assets/hero/me.jpg'). While `src` is empty a grey placeholder shows instead.
      */
     photo: {
-      src: '',
-      alt: 'Portrait of Irene',
+      src: '/assets/hero/irene.webp',
+      alt: 'Irene sitting on a bench, smiling down at a Sphynx cat in a red-collared shirt on Irene’s lap, while a second Sphynx in a mint shirt watches from a small table.',
     } satisfies ImageAsset,
+    /** Little sticker on the photo's corner. */
+    photoCaption: 'I love hairless cats!',
     /** Shown on the grey placeholder until the photo is added. */
     photoPlaceholder: 'Your photo',
   },
