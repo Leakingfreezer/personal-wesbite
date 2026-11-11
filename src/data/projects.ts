@@ -238,7 +238,7 @@ const foodForThought: Project = {
   cardSize: 'wide',
   order: 2,
   featured: false,
-  comingSoon: true,
+  comingSoon: false,
   thumbnail: fftWorkshop,
   heroImage: fftWorkshop,
   keyMetrics: keyMetrics([
