@@ -24,6 +24,18 @@ export interface Skill {
   icon: LucideIcon
 }
 
+/** One "Currently" role under the hero: the role in words, the organization as its linked logo. */
+export interface CurrentRole {
+  role: string
+  /** Organization name — the logo's alt text (screen readers read it; it isn't shown). */
+  org: string
+  url: string
+  /** Logo in /public/assets/orgs/. width/height = the file's real size (keeps its shape while loading). */
+  logo: { src: string; width: number; height: number }
+  /** Your main role: shown bigger and darker than the others. */
+  main?: boolean
+}
+
 /**
  * How a bit of text can be styled:
  *   'underline'                   → violet underline
@@ -48,6 +60,12 @@ export const site = {
     { label: 'About', href: '/#about' },
     { label: 'Lets Chat!', href: '/#contact' },
   ] satisfies NavLink[],
+
+  /** LinkedIn icon at the right end of the nav bar (opens in a new tab). */
+  linkedin: {
+    url: 'https://www.linkedin.com/in/irene-ding2007/',
+    icon: { src: '/assets/brand/linkedin.svg', alt: 'LinkedIn' } satisfies ImageAsset,
+  },
 
   /** Small 3D star beside your name in the nav. Decorative, so alt is empty. */
   logo: {
@@ -86,6 +104,29 @@ export const site = {
     photoCaption: 'I love hairless cats!',
     /** Shown on the grey placeholder until the photo is added. */
     photoPlaceholder: 'Your photo',
+    /** The "Currently" line at the bottom of the hero. Add, remove or reorder roles here. */
+    currentlyLabel: 'Currently',
+    currently: [
+      {
+        role: 'Design Engineer',
+        org: 'Playful',
+        url: 'https://www.playfuldesign.app/',
+        logo: { src: '/assets/orgs/playful.webp', width: 480, height: 180 },
+        main: true,
+      },
+      {
+        role: 'Logistics Executive',
+        org: 'Hack the 6ix',
+        url: 'https://hackthe6ix.com/',
+        logo: { src: '/assets/orgs/hackthe6ix.svg', width: 30, height: 76 },
+      },
+      {
+        role: 'Creative Director',
+        org: 'Hack Canada',
+        url: 'https://hackcanada.org/',
+        logo: { src: '/assets/orgs/hack-canada.webp', width: 150, height: 150 },
+      },
+    ] satisfies CurrentRole[],
   },
 
   about: {

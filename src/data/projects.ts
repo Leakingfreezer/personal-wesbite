@@ -215,7 +215,7 @@ const foodForThought: Project = {
   shortDescription:
     'Founded and scaled a $15K-funded youth initiative, designing and delivering hands-on cultural and creative experiences for young people.',
   category: 'Product Management · Service Design',
-  headline: 'Launch',
+  headline: 'Founder',
   year: 2025,
   cardSize: 'wide',
   order: 2,

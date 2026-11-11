@@ -1,3 +1,4 @@
+import CurrentRoles from '../hero/CurrentRoles'
 import HeroPhoto from '../hero/HeroPhoto'
 import SkillPills from '../hero/SkillPills'
 import { site } from '../../data/site'
@@ -8,7 +9,8 @@ import { site } from '../../data/site'
  * Text, pills and photo → src/data/site.ts (hero).
  */
 export default function Hero() {
-  const { headline, lead, skills, outro, outroEmphasis, outroGraphic, photo, photoCaption, photoPlaceholder } = site.hero
+  const { headline, lead, skills, outro, outroEmphasis, outroGraphic, photo, photoCaption, photoPlaceholder, currentlyLabel, currently } =
+    site.hero
 
   return (
     <section id="home" className="mx-auto max-w-page px-6 pt-hero-top pb-8 md:px-12 md:pb-12 lg:px-20">
@@ -46,6 +48,8 @@ export default function Hero() {
           className="mx-auto w-full max-w-hero-photo lg:mr-0"
         />
       </div>
+
+      <CurrentRoles label={currentlyLabel} roles={currently} />
     </section>
   )
 }

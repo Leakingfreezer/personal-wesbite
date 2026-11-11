@@ -25,7 +25,7 @@ export default function Navbar() {
             alt={site.logo.alt}
             width={48}
             height={48}
-            className="hidden size-nav-logo transition-transform duration-300 group-hover:scale-120 group-hover:rotate-12 motion-reduce:transition-none min-[360px]:block"
+            className="hidden size-nav-logo transition-transform duration-300 group-hover:scale-120 group-hover:rotate-12 motion-reduce:transition-none min-[400px]:block"
           />
         </Link>
 
@@ -41,6 +41,17 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
+          {/* LinkedIn icon, far right. Link → src/data/site.ts (linkedin). */}
+          <li>
+            <a
+              href={site.linkedin.url}
+              target="_blank"
+              rel="noreferrer"
+              className="flex size-nav-link items-center justify-center rounded-pill transition-colors duration-200 hover:bg-pill-hover"
+            >
+              <img src={site.linkedin.icon.src} alt={site.linkedin.icon.alt} width={24} height={24} className="size-[55%]" />
+            </a>
+          </li>
         </ul>
       </nav>
     </header>
