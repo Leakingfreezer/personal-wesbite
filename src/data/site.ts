@@ -186,6 +186,14 @@ export const site = {
     nextLabel: 'Next project',
     /** Shown where a case-study image hasn't been uploaded yet. */
     imagePlaceholder: 'Image placeholder',
+    /** Before the link on a stat card, e.g. "Source: Ally Bank". */
+    sourceLabel: 'Source:',
+    /** Under a wide diagram on phones. */
+    scrollHint: 'Scroll sideways to see all of it →',
+    /** Screen-reader name of a materials folder, before its title, e.g. "Open: Program materials". */
+    folderOpenLabel: 'Open:',
+    /** The close button of an opened materials folder. */
+    folderCloseLabel: 'Close',
   },
 
   /** Error screens. */

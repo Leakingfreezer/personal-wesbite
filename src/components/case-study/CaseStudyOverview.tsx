@@ -16,7 +16,7 @@ export default function CaseStudyOverview({ project }: CaseStudyOverviewProps) {
     >
       <div>
         <h2 id="overview-heading" className="text-caption text-ink-muted">
-          {labels.overviewHeading}
+          {project.overviewHeading ?? labels.overviewHeading}
         </h2>
         <p className="mt-4 text-lead">{project.overview}</p>
       </div>

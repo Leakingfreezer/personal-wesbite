@@ -5,21 +5,27 @@ import GalleryBlock from './blocks/GalleryBlock'
 import ImageBlock from './blocks/ImageBlock'
 import MetricsBlock from './blocks/MetricsBlock'
 import QuoteBlock from './blocks/QuoteBlock'
+import MaterialsBlock from './blocks/MaterialsBlock'
+import OperatingModelBlock from './blocks/OperatingModelBlock'
+import PhotoGridBlock from './blocks/PhotoGridBlock'
+import SectionBlock from './blocks/SectionBlock'
 import TableBlock from './blocks/TableBlock'
+import TextWithNoteBlock from './blocks/TextWithNoteBlock'
 
 interface CaseStudyContentProps {
   body: CaseStudyBlock[]
 }
 
 /**
- * Text is kept to a comfortable reading width (max-w-3xl) inside a wider column,
- * so images and galleries can be bigger than the paragraphs around them.
+ * Text is kept to a comfortable reading width (max-w-3xl), lined up with the column's left edge,
+ * so images and galleries can be wider than the paragraphs while every section starts on one line.
  */
-const textWidth = 'mx-auto max-w-3xl'
+const textWidth = 'max-w-3xl'
 
 /**
  * How each kind of content looks. To restyle headings, paragraphs, lists or links, edit them here.
- * To restyle a custom block (image, gallery, metrics, quote, table, flow), edit its file in ./blocks/.
+ * To restyle a custom block (image, gallery, metrics, quote, table, flow, section, textWithNote,
+ * photoGrid, materials, operatingModel), edit its file in ./blocks/.
  */
 const components: PortableTextComponents = {
   block: {
@@ -45,6 +51,11 @@ const components: PortableTextComponents = {
     quote: ({ value }) => <QuoteBlock block={value} />,
     table: ({ value }) => <TableBlock block={value} />,
     flow: ({ value }) => <FlowBlock block={value} />,
+    section: ({ value }) => <SectionBlock block={value} />,
+    textWithNote: ({ value }) => <TextWithNoteBlock block={value} />,
+    photoGrid: ({ value }) => <PhotoGridBlock block={value} />,
+    materials: ({ value }) => <MaterialsBlock block={value} />,
+    operatingModel: ({ value }) => <OperatingModelBlock block={value} />,
   },
 }
 

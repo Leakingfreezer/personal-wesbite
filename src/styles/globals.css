@@ -25,6 +25,11 @@
   --color-highlight-blue: #5aa6ea;
   --color-highlight-yellow: #ffd95a;
   --color-accent-violet: #8b5cf6;
+  /* Case studies: quote cards, operating-model steps */
+  --color-accent-violet-soft: #efebff;
+  /* Case studies: the materials folder (back panel + tab, and the front flap) */
+  --color-folder-back: #c4b5fd;
+  --color-folder-front: #ddd6fe;
   /* Record player widget: grey card (with grain, see bg-grain below) and the record's metal centre hub */
   --color-player: #cfcdd0; /* card — a faintly cool grey */
   --color-record-hub: #7e7c89; /* slate outer ring */
@@ -61,6 +66,8 @@
   --radius-photo: 1.25rem; /* 20px — About photo cards */
   --radius-pill: 9999px; /* nav pill, buttons */
   --shadow-pill: 0 4px 4px 0 rgb(0 0 0 / 0.25); /* nav pill drop shadow */
+  --shadow-folder: 0 6px 18px rgb(0 0 0 / 0.12), 0 1px 3px rgb(0 0 0 / 0.08); /* materials folder: the pieces inside it */
+  --shadow-folder-front: 0 -3px 10px rgb(0 0 0 / 0.08), inset 0 1px 0 rgb(255 255 255 / 0.6); /* front flap: shadow cast up onto the pieces + a light top edge */
   --drop-shadow-sticker: 0 4px 4px rgb(0 0 0 / 0.25); /* follows sticker outlines in the hero */
   --shadow-record: 0 8px 24px rgb(0 0 0 / 0.14), 0 2px 6px rgb(0 0 0 / 0.08); /* wide, soft shadow the record casts on the card */
   /* Record player details: the hub sits on the record, its label is sunken, the cap is raised, the button is pressed in */
