@@ -322,46 +322,4 @@ const foodForThought: Project = {
   ],
 }
 
-/* ── GROOVE ────────────────────────────────────────────────────────────── */
-// Images made by scripts/make-groove-images.py from Irene's GROOVE slide and her MVP 1 sketch.
-
-const grooveCover: ProjectImage = {
-  url: '/assets/projects/groove-cover-1200.webp',
-  srcSet: '/assets/projects/groove-cover-1200.webp 1200w, /assets/projects/groove-cover-1672.webp 1672w',
-  alt: 'GROOVE concept development: a pencil sketch of the device labelled speaker, rotary selector, OLED screen, power button, USB-C charging port, light-pipe signifier and sound slot buttons; beside it, a form exploration render (a cream and translucent-lilac handheld with a metal dial, black screen and three square buttons) and handwritten sequencer notes with a row of drum sound boxes.',
-  width: 1672,
-  height: 941,
-}
-
-const grooveSketch: ProjectImage = {
-  url: '/assets/projects/groove-sketch-1200.webp',
-  srcSet: '/assets/projects/groove-sketch-1200.webp 1200w, /assets/projects/groove-sketch-2360.webp 2360w',
-  alt: 'MVP 1 sketch: a pencil drawing of GROOVE labelled speaker, rotary selector, OLED screen, power button, USB-C charging port, light-pipe signifier and sound slot buttons. Blue notes describe the mechanisms (capture drums, melody and vocals; a step sequencer; swapping sound slots over NFC and Bluetooth) and sketch the loading screen and menu.',
-  width: 2360,
-  height: 1640,
-}
-
-const groove: Project = {
-  slug: 'groove',
-  title: 'GROOVE',
-  shortDescription: 'A tactile music-making device.',
-  category: 'Hardware · Industrial Design · Interaction',
-  headline: 'Concept',
-  year: 2026,
-  cardSize: 'wide',
-  order: 4,
-  featured: false,
-  comingSoon: true,
-  thumbnail: grooveCover,
-  heroImage: grooveCover,
-  role: 'Product & Interaction Designer',
-  tools: [],
-  overview: 'GROOVE is a tactile music-making device: a small handheld for capturing beats, arranging them, and swapping sounds with friends.',
-  body: [
-    h2('MVP 1'),
-    p('Three mechanisms: **capture** your three beats (drums, melody, vocals), arrange them in a **sequencer**, and **swap** sound slots with others over NFC and Bluetooth. A rotary selector moves through the menu and the sequencer; the sound slot buttons place notes.'),
-    image(grooveSketch, 'The MVP 1 sketch, with the controls and screens labelled.'),
-  ],
-}
-
-export const projects: Project[] = [oneChild, foodForThought, groove]
+export const projects: Project[] = [oneChild, foodForThought]
